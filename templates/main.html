@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI HUB LAUNCH TUT</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--  bootstrap link  -->
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <!--   bootstrap link     -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!--   css link     -->
+    <link href="{{ url_for('static', filename= 'css/main.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <h3>AI HUB LAUNCH, 24 MARCH 2023</h3>
+    </nav>
+
+    <div class = "container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        {% endfor %}
+
+        <form id="rsvp" enctype = 'multipart/form-data' method="POST">
+            <!-- ------------------------------------------------------------- -->
+            <div class="form-row">
+              <div class="form-group col-lg-6">
+                <label>Title:</label>
+                <input class="form-control" type="text" name="title" placeholder="Mr, Ms, Mrs, Dr, Prof." required>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------- -->
+            <div class="form-row">
+              <div class="form-group col-lg-6">
+                <label>First Name:</label>
+                <input class="form-control" type="text" name="first_name" placeholder="First Name" required>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------- -->
+            <div class="form-row">
+              <div class="form-group col-lg-6">
+                <label>Last Name:</label>
+                <input class="form-control" type="text" name="last_name" placeholder="Last Name" required>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------- -->
+            <div class="form-row">
+              <div class="form-group col-lg-6">
+                <label>Email:</label>
+                <input class="form-control" type="text" name="email" placeholder="example@gmail/yahoo/outlook.com" required>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------- -->
+            <div class="form-group">
+                <div class="form-row">
+                    <label>Will Attend?</label>
+                </div>
+
+                <div class="row col-lg-12">
+                    <label>Yes</label>
+                         <input type="checkbox" value = "Available" name="checkbox">
+
+                    <div class="row col-lg-12">
+                        <label>No</label>
+                            <input type="checkbox" value = "Unvailable" name="checkbox">
+                       </div>
+                    </div>
+                  </div>
+            <button type="submit" id="submit" class="submit">RSVP</button>
+          </form>
+        {% if filename %}
+         <!--   Display generated QR code  -->
+            <div class="image-section">
+                <div class="img-preview">
+                    <div id="imagePreview">
+                        <img src="{{ url_for('static', filename='/qr_codes/' + filename) }}">
+                    </div>
+                </div>
+<!--                <p><a href="{{url_for('download_qr_code')}}"> Download QR Code</a></p>-->
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
